@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pramod Deshmukh - Manage-O-Tech Consulting</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80")
+          center/cover;
+        opacity: 0.1;
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        padding: 0 20px;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .hero .company {
+        font-size: 1.5rem;
+        font-weight: 300;
+        margin-bottom: 30px;
+        opacity: 0.9;
+      }
+
+      .hero .tagline {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto 40px;
+        opacity: 0.95;
+      }
+
+      .cta-button {
+        display: inline-block;
+        padding: 15px 30px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid white;
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        margin: 5px;
+      }
+
+      .cta-button:hover {
+        background: white;
+        color: #667eea;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        padding: 15px 0;
+        transition: all 0.3s ease;
+        transform: translateY(-100%);
+        animation: slideDown 0.5s ease-out 0.5s forwards;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #667eea;
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      /* Sections */
+      section {
+        padding: 80px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: azure;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 50px;
+        color: #333;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 2px;
+      }
+
+      /* Services Grid */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .service-card {
+        background: white;
+        padding: 40px 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid #f0f0f0;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .service-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        color: white;
+        font-size: 24px;
+      }
+
+      .service-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .service-card p {
+        color: #666;
+        line-height: 1.6;
+      }
+
+      /* Stats Section */
+      .stats {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        text-align: center;
+        margin: 80px 0;
+        border-radius: 20px;
+        padding: 60px 20px;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .stat-item h3 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .stat-item p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      /* Experience Cards */
+      .experience-timeline {
+        position: relative;
+        margin: 50px 0;
+      }
+
+      .timeline-item {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        border-left: 4px solid #667eea;
+        transition: all 0.3s ease;
+      }
+
+      .timeline-item:hover {
+        transform: translateX(10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .timeline-date {
+        color: #667eea;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .timeline-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin: 10px 0;
+        color: #333;
+      }
+
+      .timeline-company {
+        color: #764ba2;
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+
+      .highlight {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 700;
+      }
+
+      /* Contact Section */
+      .contact {
+        background: white;
+        border-radius: 20px;
+        padding: 60px 40px;
+        text-align: center;
+      }
+
+      .contact-content {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .contact h2 {
+        margin: 30px 0 20px 0;
+        color: #333;
+      }
+
+      .contact p {
+        font-size: 1.1rem;
+        color: #666;
+      }
+
+      /* Profile within contact section */
+      .profile-container {
+        margin-bottom: 40px;
+      }
+
+      .profile-image {
+        margin-bottom: 20px;
+      }
+
+      .profile-photo {
+        aspect-ratio: 1/1;
+        height: 30vh;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #667eea;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .profile-photo:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 35px rgba(102, 126, 234, 0.3);
+      }
+
+      .profile-credentials h3 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .credential {
+        font-size: 1rem;
+        margin-bottom: 0px;
+        color: #667eea;
+        font-weight: 500;
+        line-height: 1.2;
+      }
+
+      .credential:last-child {
+        margin-bottom: 0;
+      }
+
+      .social-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .social-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        color: white;
+        min-width: 200px;
+        justify-content: center;
+      }
+
+      .social-button.linkedin {
+        background: linear-gradient(135deg, #0077b5, #005885);
+      }
+
+      .social-button.linkedin:hover {
+        background: linear-gradient(135deg, #005885, #004066);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 119, 181, 0.3);
+      }
+
+      .social-button.facebook {
+        background: linear-gradient(135deg, #1877f2, #1465d6);
+      }
+
+      .social-button.facebook:hover {
+        background: linear-gradient(135deg, #1465d6, #1357c2);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(24, 119, 242, 0.3);
+      }
+
+      .social-icon {
+        font-size: 1.2rem;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero .company {
+          font-size: 1.2rem;
+        }
+
+        nav ul {
+          flex-wrap: wrap;
+          gap: 15px;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .social-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .social-button {
+          min-width: 250px;
+        }
+      }
+
+      /* Author Profile */
+      .floating-shapes {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .shape {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .shape:nth-child(1) {
+        width: 80px;
+        height: 80px;
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+
+      .shape:nth-child(2) {
+        width: 120px;
+        height: 120px;
+        top: 60%;
+        right: 10%;
+        animation-delay: 2s;
+      }
+
+      .shape:nth-child(3) {
+        width: 60px;
+        height: 60px;
+        top: 30%;
+        right: 30%;
+        animation-delay: 4s;
+      }
+
+      .contact-line {
+        margin-bottom: 30px;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+      </div>
+      <div class="hero-content">
+        <h1>Pramod Deshmukh</h1>
+        <p class="company">Manage-O-Tech Consulting</p>
+        <p class="tagline">
+          Transforming businesses through strategic leadership coaching and
+          helping SMEs
+          <strong>double their revenue and triple their profits</strong>
+        </p>
+        <a href="#services" class="cta-button">Discover My Services</a>
+        <br />
+        <a
+          href="https://www.linkedin.com/in/pramod-s-deshmukh"
+          target="_blank"
+          class="cta-button"
+          >Connect on Linkedin</a
+        >
+      </div>
+    </section>
+
+    <!-- Core Services -->
+    <section id="services">
+      <h2 class="section-title fade-in">Core Services</h2>
+      <div class="services-grid">
+        <div class="service-card fade-in">
+          <div class="service-icon">👨‍💼</div>
+          <h3>Leadership 1-1 Coaching</h3>
+          <p>
+            Personalized coaching for corporate leaders focusing on team
+            management excellence and developing second-line successors.
+          </p>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon">🎯</div>
+          <h3>Corporate Leadership Training</h3>
+          <p>
+            Comprehensive training programs for General Managers, VPs, and
+            Directors to enhance leadership effectiveness.
+          </p>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon">🌍</div>
+          <h3>International Business Coaching</h3>
+          <p>
+            Strategic guidance for businesses looking to expand globally and
+            navigate international markets successfully.
+          </p>
+        </div>
+      </div>
+
+      <div class="stats fade-in">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <h3>20+</h3>
+            <p>Years of Experience</p>
+          </div>
+          <div class="stat-item">
+            <h3>2x</h3>
+            <p>Revenue Growth</p>
+          </div>
+          <div class="stat-item">
+            <h3>3x</h3>
+            <p>Profit Increase</p>
+          </div>
+          <div class="stat-item">
+            <h3>52+</h3>
+            <p>Weeks Coaching</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Business Growth Consulting -->
+    <section id="methodology">
+      <h2 class="section-title fade-in">My Methodology</h2>
+      <div
+        class="service-card fade-in"
+        style="max-width: 800px; margin: 0 auto"
+      >
+        <h3>Business Growth Consulting</h3>
+        <p>
+          I specialize in helping Small & Medium Business Owners achieve
+          remarkable growth by
+          <span class="highlight"
+            >doubling their revenue and tripling their profits</span
+          >. My approach focuses on analyzing true potential and realizing
+          objectives through enhanced knowledge and skills development.
+        </p>
+
+        <p style="margin-top: 20px">
+          Working closely with MSME Business Owners on a
+          <span class="highlight"
+            >week-on-week basis for 52 weeks and beyond</span
+          >, I help transform mindsets, align thoughts with actions, and develop
+          success-oriented habits.
+        </p>
+      </div>
+
+      <div class="services-grid" style="margin-top: 40px">
+        <div class="service-card fade-in">
+          <div class="service-icon">📊</div>
+          <h3>Daily Actions Implementation</h3>
+          <p>
+            Structured daily action plans to ensure consistent progress toward
+            business goals.
+          </p>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon">📈</div>
+          <h3>Weekly Progress Tracking</h3>
+          <p>
+            Regular monitoring and adjustment of strategies based on weekly
+            performance metrics.
+          </p>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon">🔍</div>
+          <h3>Monthly Comprehensive Reviews</h3>
+          <p>
+            In-depth analysis of achievements, challenges, and strategic
+            adjustments for optimal growth.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership Development -->
+    <section>
+      <h2 class="section-title fade-in">Leadership Development</h2>
+      <div class="services-grid">
+        <div class="service-card fade-in">
+          <div class="service-icon">🎖</div>
+          <h3>Executive Coaching for Corporate Leaders</h3>
+          <p>
+            Specialized 1-1 coaching for General Managers, VPs, and Directors of
+            large corporations to enhance leadership effectiveness and advance
+            on their success ladder.
+          </p>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon">🚀</div>
+          <h3>MSME Leadership Transformation</h3>
+          <p>
+            <span class="highlight">Extremely TRANSFORMATIONAL</span> coaching
+            covering Marketing Strategy, Sales Excellence, Operations
+            Management, R&D, Financial Management, HR, and Professional
+            Management.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section id="experience">
+      <h2 class="section-title fade-in">Professional Experience</h2>
+      <div class="experience-timeline">
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">October 2004 - Present (20+ years)</div>
+          <div class="timeline-title">
+            Certified Finance & Insurance Consultant
+          </div>
+          <div class="timeline-company">
+            Life Insurance Corporation of India
+          </div>
+          <p>
+            <strong>Specializations:</strong> Life Insurance Solutions,
+            Retirement Planning, Family Protection Programs, Business Liability
+            Protection Insurance, Children's Education Planning, and Critical
+            Illness Protection Plans.
+          </p>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">May 2014 - October 2024 (10+ years)</div>
+          <div class="timeline-title">Chief Insurance Advisor</div>
+          <div class="timeline-company">Pune</div>
+          <p>
+            <strong>Team Building Success:</strong> Successfully recruited
+            diverse professionals including GM Finance, GM Marketing, GM
+            Materials, Accounts Managers, HR Managers, Teachers, and Retired
+            Executives to Team PRAMOD DESHMUKH.
+          </p>
+          <p>
+            <strong>Mission:</strong> Spreading the concept of SECURITY while
+            achieving personal financial freedom for all team members.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Community -->
+    <section>
+      <h2 class="section-title fade-in">Education & Community Leadership</h2>
+      <div class="services-grid">
+        <div class="service-card fade-in">
+          <div class="service-icon">🎓</div>
+          <h3>Education</h3>
+          <p>
+            <strong>COEP Technological University</strong><br />
+            Bachelor of Engineering, Mechanical Engineering (1980-1984)<br />
+            <span class="highlight">Grade: Distinction</span>
+          </p>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon">🤝</div>
+          <h3>Rotary International Member</h3>
+          <p>
+            <strong>Rotary Club of Nigdi Pune</strong> (July 1997 - Present, 28+
+            years)<br />
+            Focus on Youth Development, Entrepreneurship Promotion, and Career
+            Guidance with a corporate approach to social service.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section with Author Profile -->
+    <section id="contact">
+      <div class="contact fade-in">
+        <div class="contact-content">
+          <!-- Author Profile -->
+          <div class="profile-container">
+            <div class="profile-image">
+              <img
+                src="./psd.jpeg"
+                alt="Pramod S Deshmukh"
+                class="profile-photo"
+              />
+            </div>
+            <div class="profile-credentials">
+              <h3>Pramod S Deshmukh</h3>
+              <p class="credential">Harvard Business School - HBX</p>
+              <p class="credential">BE COEP</p>
+            </div>
+          </div>
+
+          <h2>Join Team PRAMOD DESHMUKH</h2>
+          <p class="contact-line">
+            Connect with me, today and supercharge your MSME growth and
+            profitability journey
+          </p>
+          <div class="social-buttons">
+            <a
+              href="https://linkedin.com/in/pramod-s-deshmukh"
+              class="social-button linkedin"
+              target="_blank"
+            >
+              <span class="social-icon">💼</span>
+              Connect on LinkedIn
+            </a>
+            <a
+              href="https://facebook.com/pramod.deshmukh"
+              class="social-button facebook"
+              target="_blank"
+            >
+              <span class="social-icon">📘</span>
+              Connect on Facebook
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('nav a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Fade in animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all fade-in elements
+      document.querySelectorAll(".fade-in").forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Navbar background on scroll
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector("nav");
+        if (window.scrollY > 100) {
+          nav.style.background = "rgba(255,255,255,0.98)";
+          nav.style.boxShadow = "0 2px 20px rgba(0,0,0,0.1)";
+        } else {
+          nav.style.background = "rgba(255,255,255,0.95)";
+          nav.style.boxShadow = "none";
+        }
+      });
+
+      // Counter animation for stats
+      function animateCounter(element, target) {
+        let current = 0;
+        const increment = target / 100;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          element.textContent = Math.floor(current) + (target > 10 ? "+" : "x");
+        }, 20);
+      }
+
+      // Trigger counter animation when stats section is visible
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const counters = entry.target.querySelectorAll(".stat-item h3");
+            counters.forEach((counter) => {
+              const target = parseInt(counter.textContent);
+              animateCounter(counter, target);
+            });
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      });
+
+      const statsSection = document.querySelector(".stats");
+      if (statsSection) {
+        statsObserver.observe(statsSection);
+      }
+    </script>
+  </body>
+</html>
